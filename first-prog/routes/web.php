@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/post/{name}', function($name){
+   return "Welcome to the PHP course " . $name . "!";
+});
