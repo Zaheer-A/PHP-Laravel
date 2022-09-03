@@ -14,9 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('Welcome');
 });
 
-Route::get('/post/{name}', function($name){
-   return "Welcome to the PHP course " . $name . "!";
-});
+//Route::get('/post/{name}', function($name){
+//   return "Welcome to the PHP course " . $name . "!";
+//});
+
+
+Route::get('/post/{variable}', '\App\Http\Controllers\PostController@index');
+
+//Create special routes to use in your controllers
+Route::resource('posts', '\App\Http\Controllers\PostController');
