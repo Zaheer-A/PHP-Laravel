@@ -81,4 +81,20 @@ class PostController extends Controller
     {
         //
     }
+
+    /**
+     * Custom method to show a view
+     * @return void
+     */
+    public function contact()
+    {
+        return view('contact_view');
+    }
+
+    public function show_post($id, $name){
+//        return view('post')-> with('id', $id);
+//        The method below does the same thing. As long as the name inside compact is the same as the
+//        variable being passed it will use it.
+        return view('post', compact('id', 'name'));
+    }
 }

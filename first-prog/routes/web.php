@@ -22,7 +22,13 @@ Route::get('/', function () {
 //});
 
 
-Route::get('/post/{variable}', '\App\Http\Controllers\PostController@index');
+//Route::get('/post/{variable}', '\App\Http\Controllers\PostController@index');
 
 //Create special routes to use in your controllers
-Route::resource('posts', '\App\Http\Controllers\PostController');
+//Route::resource('posts', '\App\Http\Controllers\PostController');
+
+
+Route::get('contact', '\App\Http\Controllers\PostController@contact');
+
+
+Route::get('post/{id}/{name}', '\App\Http\Controllers\PostController@show_post');
