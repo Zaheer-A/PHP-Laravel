@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('possts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('name');
             $table->text('body');
             $table->timestamps();
         });
