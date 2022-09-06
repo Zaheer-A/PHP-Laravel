@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
+use App\Models\User;
+use App\Models\Country;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,9 +80,9 @@ Route::get('/insert', function(){
 
 Route::get('/read', function (){
 
-    $posts = Post::all(); //Pulls all the records!
+    $posts = User::all(); //Pulls all the records!
     foreach ($posts as $post){
-        return $post->title;
+        return $post;
     }
 });
 
@@ -96,5 +98,156 @@ Route::get('/findmore', function(){
 
 });
 
+Route::get('/basicinsert', function(){
 
+    $post = new Post;
+
+    $post->title = 'new ORM title';
+    $post->body= 'wow eloquent is so cool';
+
+    $post->save(); //Save and update the record
+
+});
+
+Route::get('/findrecord', function(){
+
+    $post = Post::find(3);
+
+    $post->title = 'even newer title!';
+    $post->body= 'ORM input';
+
+    $post->save(); //Save and update the record
+
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| Multiple table editing
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/create', function (){
+   Post::create(['title' => 'basic insert', 'body' => 'Wow I love so much']);
+});
+
+
+Route::get('/update', function(){
+
+    Post::where('id', 5)->where('is_admin', 0)->update(['title'=>'The better title', 'body'=>'The even better description']);
+
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| Delete function (multiple methods)
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/deleteOne', function(){
+
+    $delete_post = Post::find(6);
+    $delete_post->delete();
+
+});
+
+Route::get('/deleteTwo', function(){
+
+    Post::destroy([4, 5]);
+
+});
+
+/*
+|--------------------------------------------------------------------------
+| SOFT Delete & Retrieve
+|--------------------------------------------------------------------------
+*/
+Route::get('/softDelete', function(){
+
+    Post::find(9)->delete();
+
+});
+
+Route::get('/readSoftDelete', function(){
+
+//    $post = Post::find(8);
+//    return $post;
+
+    $post =  Post::withTrashed()->where('id', 8)->get();
+    return $post;
+
+});
+
+
+Route::get('/retrieve', function (){
+    Post::withTrashed()->where('is_admin', 0)->restore();
+    echo "item restored";
+});
+
+/*
+|--------------------------------------------------------------------------
+| Hard Delete PERMANENT
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/forceDelete', function (){
+
+    Post::withTrashed()->where('id', 10)->forceDelete();
+    echo 'Item delted permanently';
+
+});
+
+/*
+|--------------------------------------------------------------------------
+| Eloquent Data Relations
+|--------------------------------------------------------------------------
+*/
+Route::get('/user/{id}/post', function($id){
+    echo 'Methods called';
+    return User::find($id)->post;
+
+});
+
+Route::get('/post/{id}/user', function($id){
+
+    return Post::find($id)->user->name;
+});
+
+Route::get('/posts/{id}', function($id){
+
+    $user = User::find($id);
+    $posts = $user->posts;
+    foreach ($posts as $post){
+        echo $post->title . "<br>";
+    }
+
+});
+
+Route::get('/role/{user}', function($user){
+   $user = User::find($user);
+   foreach($user->roles as $role){
+       echo $user->name . " is an " . $role->name;
+   }
+});
+
+
+Route::get('/user/pivot', function(){
+
+    $user = User::find(1);
+    foreach($user->roles as $role){
+        echo $role->pivot->created_at;
+    }
+
+});
+
+Route::get('/user/country', function(){
+
+    $country = Country::find(2);
+
+    foreach($country->posts as $post){
+        echo $post->title . "<br>";
+    }
+
+});
 
