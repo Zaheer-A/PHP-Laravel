@@ -1,10 +1,12 @@
 <?php
 
+use App\Models\Tag;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Country;
+use App\Models\Photo;
 
 /*
 |--------------------------------------------------------------------------
@@ -251,3 +253,40 @@ Route::get('/user/country', function(){
 
 });
 
+
+//Polymorphic Relations
+Route::get('/photo/user/{id}', function($id){
+    $user = User::find($id);
+    foreach($user->photos as $photo){
+        return $photo->path;
+    }
+});
+
+Route::get('/photo/post/{id}', function($id){
+    $post = Post::find($id);
+    foreach($post->photos as $photo){
+        return $photo->path;
+    }
+});
+
+Route::get('/photo/{id}', function($id){
+
+    $photo = Photo::findOrFail($id);
+    return $photo;
+
+});
+
+//Polymorphic MAny to Many
+Route::get('/post/tag/{id}', function($id){
+   $post = Post::find($id);
+   foreach($post->tags as $tag){
+       echo $tag->name . "<br>";
+   }
+});
+
+Route::get('/tag/post', function(){
+    $tag = Tag::find(2);
+    foreach($tag->posts as $post){
+        return $post->title;
+    }
+});

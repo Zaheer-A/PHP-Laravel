@@ -26,4 +26,13 @@ class Post extends Model
         return $this->belongsTo('App\Models\User');
     }
 
+    public function photos(){
+        return $this->morphMany('App\Models\Photo', 'imageable');
+    }
+
+    //Get the tags for this post
+    public function tags(){
+        return $this->morphToMany('App\Models\Tag', 'taggable');
+    }
+
 }
