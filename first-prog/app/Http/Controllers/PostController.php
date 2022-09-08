@@ -16,7 +16,7 @@ class PostController extends Controller
     public function index()
     {
 
-        $posts = Post::all();
+        $posts = Post::recent();
         return view('posts.index', compact('posts'));
     }
 
@@ -38,6 +38,21 @@ class PostController extends Controller
      */
     public function store(CreatePostRequest $request)
     {
+
+        $input = $request->all();
+        if($file = $request->file('file')){
+            $name = $file->getClientOriginalName();
+            //Creates an images folder in the public directory
+            $file->move('images', $name);
+            $input['path'] = $name;
+        }
+
+        Post::create($input);
+
+        //How to store a file
+//        return $request->file('file');
+
+
 //        $this->validate($request, [
 //
 //            'title'=>'required',
@@ -45,12 +60,12 @@ class PostController extends Controller
 //
 //        ]);
 //        Post::create($request->all());
-        $post = new Post();
-        $post->title = $request->title;
-        $post->body = $request->body;
-        $post->save();
-
-        return redirect('/posts');
+//        $post = new Post();
+//        $post->title = $request->title;
+//        $post->body = $request->body;
+//        $post->save();
+//
+//        return redirect('/posts');
     }
 
     /**

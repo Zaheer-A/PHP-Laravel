@@ -5,8 +5,9 @@
 
 {{--    <form method="post" action="/posts">--}}
 
-    {!! Form::open(['method'=>'post', 'action'=>'App\Http\Controllers\PostController@store']) !!}
+    {!! Form::open(['method'=>'post', 'action'=>'App\Http\Controllers\PostController@store', 'files'=>true]) !!}
         @csrf
+
 
     <div class="form-group">
         {!! Form::label('title', 'Title:') !!}
@@ -15,9 +16,19 @@
         {!! Form::text('body', null, ['class'=>'form-control']) !!}
     </div>
 
+    Submit file
+    <div class="form-group">
+        {!! Form::file('file') !!}
+    </div>
+
+    <br>
+
     <div class="form-group">
         {!! Form::submit('Create Post', ['class' => 'btn btn-primary']) !!}
     </div>
+
+
+
 
 {{--        <input type="text" name="title" placeholder="Enter Title">--}}
 {{--        <input type="text" name="body" placeholder="Enter body">--}}

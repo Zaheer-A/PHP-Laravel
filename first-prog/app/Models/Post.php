@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Post extends Model
 {
 
+    public $directory = '/images/';
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
@@ -19,7 +20,8 @@ class Post extends Model
     protected $table = 'possts';
     protected $fillable = [
         "title",
-        "body"
+        "body",
+        "path"
     ];
 
     public function user(){
@@ -33,6 +35,15 @@ class Post extends Model
     //Get the tags for this post
     public function tags(){
         return $this->morphToMany('App\Models\Tag', 'taggable');
+    }
+
+
+    public static function scopeRecent($query){
+        return $query->orderBy('id', 'asc')->get();
+    }
+
+    public function getPathAttribute($value){
+        return $this->directory . $value;
     }
 
 }
