@@ -5,7 +5,7 @@
 
 
     <title>Post</title>
-    <h4>Layouts.app template ends here</h4>
+{{--    <h4>Layouts.app template ends here</h4>--}}
 
     <div class="container">
         @yield('content')

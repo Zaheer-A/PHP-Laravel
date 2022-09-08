@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('possts', function (Blueprint $table) {
             $table->id();
-//            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->unsigned()->default(0);
             $table->string('title');
             $table->text('body');
             $table->timestamps();
@@ -24,7 +24,7 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
-     *
+
      * @return void
      */
     public function down()
