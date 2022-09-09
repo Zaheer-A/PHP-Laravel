@@ -5,8 +5,9 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class Role
+class RoleMiddleware
 {
+
     /**
      * Handle an incoming request.
      *
@@ -16,7 +17,9 @@ class Role
      */
     public function handle(Request $request, Closure $next)
     {
-        return redirect('/');
+
+
+
         return $next($request);
     }
 

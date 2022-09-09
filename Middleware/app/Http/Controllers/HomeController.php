@@ -21,8 +21,19 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+//        echo $request->session()->put(['ashma'=>'php coder']);
+//        session(['edwin'=>'php teacher']);
+//        return session('edwin');
+
+//        flush = delete all sessions
+//        foget(key) = forget one session
+//        return $request->session()->flush();
+
+        $request->session()->flash('message', "Post has been created");
+        return $request->session()->get('message');
+
+//        return view('home');
     }
 }

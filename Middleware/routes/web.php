@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +27,18 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/admin/user/roles', ['middleware'=>'role', function(){
 
 
-    return "Middleware Role";
+    return "Middleware RoleMiddleware";
 
 }]);
+
+//Route::get('/isAdmin', function(){
+//    $user = Auth::user();
+//    if($user->isAdmin()){
+//        echo $user->name . " is an admin";
+//    } else {
+//        echo $user->name . " is not an admim";
+//    }
+//});
+
+Route::get('/admin', 'App\Http\Controllers\AdminController@index');
+
