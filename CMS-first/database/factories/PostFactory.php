@@ -21,7 +21,7 @@ class PostFactory extends Factory
 //            'user_id' => User::factory()->create(),//Relate this user id to the user model
             'title' => fake() ->sentence,
             'post_image' => fake() ->imageUrl('900', '300'),
-            'body' => fake() -> paragraph
+            'body' => fake() -> paragraph(200)
         ];
     }
 }
