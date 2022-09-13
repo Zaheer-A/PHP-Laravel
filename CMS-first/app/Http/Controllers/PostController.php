@@ -48,6 +48,8 @@ class PostController extends Controller
 
     public function destroy(Post $post, Request $request){
 
+        $this->authorize('delete', $post);
+
         $post->delete();
 
 
@@ -56,6 +58,7 @@ class PostController extends Controller
     }
 
     public function edit(Post $post){
+        $this->authorize('view', $post);
         return view('posts.edit', ['post'=>$post]);
     }
 
@@ -74,6 +77,9 @@ class PostController extends Controller
 
         $post->title = $inputs['title'];
         $post->body = $inputs['body'];
+
+
+        $this->authorize('update', $post);
 
         $post->save();
         \session()->flash('editMessage', 'Post has been updated');

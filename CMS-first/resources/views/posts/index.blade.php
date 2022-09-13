@@ -53,11 +53,14 @@
                                     <td>{{$post->created_at->diffForHumans()}}</td>
                                     <td>{{$post->updated_at->diffForHumans()}}</td>
                                     <td>
+                                        @can('view', $post)
                                         <form method="post" action="{{route('post.destroy', $post->id)}}" enctype="multipart/form-data">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-danger" type="submit">Delete</button>
-                                        </form></td>
+                                        </form>
+                                        @endcan
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
