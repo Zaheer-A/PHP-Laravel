@@ -14,8 +14,13 @@
                            placeholder="Enter title">
                 </div>
 
+{{--                <div class="form-group">--}}
+{{--                    <textarea name="body" id="body " cols="100" rows="25"></textarea>--}}
+{{--                </div>--}}
+
                 <div class="form-group">
-                    <textarea name="body" id="body " cols="100" rows="25"></textarea>
+                    <label>Body</label>
+                    <textarea name="description" rows="5" cols="40" class="form-control"></textarea>
                 </div>
 
                 <div class="form-group">
