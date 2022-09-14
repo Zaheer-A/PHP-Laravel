@@ -6,7 +6,6 @@
 @section('content')
         <h1>Welcome</h1>
         <h1 class="my-4">Blog page
-            <small>Latest</small>
         </h1>
 
     @foreach($posts as $post)
