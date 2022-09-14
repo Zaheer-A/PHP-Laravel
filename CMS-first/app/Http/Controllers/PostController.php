@@ -10,8 +10,8 @@ class PostController extends Controller
 {
 
     public function index(){
-//        $posts = Post::all();
-        $posts = auth()->user()->posts;
+        $posts = Post::all();
+//        $posts = auth()->user()->posts;
         return view('posts.index', ['posts' => $posts]);
     }
 
@@ -48,7 +48,7 @@ class PostController extends Controller
 
     public function destroy(Post $post, Request $request){
 
-        $this->authorize('delete', $post);
+//        $this->authorize('delete', $post);
 
         $post->delete();
 

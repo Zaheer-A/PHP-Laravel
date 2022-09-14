@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,4 +32,6 @@ Route::middleware('auth')->group(function(){
     Route::delete('/admin/posts/{post}/delete', [PostController::class, 'destroy'])->name('post.destroy');
     Route::patch('/admin/posts/{post}/update', [PostController::class, 'update'])->name('post.update');
 
+    Route::get('/profile/{user}', [UserController::class, 'show'])->name('user.profile.show');
+    Route::put('/profile/{user}/update', [UserController::class, 'update'])->name('user.profile.update');
 });
