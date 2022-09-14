@@ -54,7 +54,7 @@
                     <label for="email">Email:</label>
                     <input type="text"
                            name="email"
-                           class="form-control"
+                           class="form-control @error('email') is-invalid @enderror"
                            id="email"
                            aria-describedby=""
                            placeholder="{{$user->email}}"
