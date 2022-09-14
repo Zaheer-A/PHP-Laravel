@@ -27,7 +27,7 @@
                            class="form-control {{$errors->has('username') ? 'is-invalid' : ''}}"
                            id="username"
                            aria-describedby=""
-                           placeholder="{{$user->username}}"
+                           value="{{$user->username}}"
                     >
                     @error('username')
                         <div class="invalid-feedback">
@@ -42,7 +42,7 @@
                        class="form-control @error('name') is-invalid @enderror"
                        id="name"
                        aria-describedby=""
-                        placeholder="{{$user->name}}"
+                       value="{{$user->name}}"
                 >
                     @error('name')
                     <div class="invalid-feedback">
@@ -57,7 +57,7 @@
                            class="form-control @error('email') is-invalid @enderror"
                            id="email"
                            aria-describedby=""
-                           placeholder="{{$user->email}}"
+                           value="{{$user->email}}"
                     >
                     @error('email')
                     <div class="invalid-feedback">
@@ -71,7 +71,7 @@
                            name="password"
                            class="form-control"
                            id="password"
-                           aria-describedby=""
+                           placeholder="****"
                     >
                     @error('password')
                     <div class="invalid-feedback">
@@ -85,7 +85,7 @@
                            name="password-confirmation"
                            class="form-control"
                            id="password-confirmation"
-                           aria-describedby=""
+                           placeholder="****"
                     >
                     @error('password_confirmation')
                     <div class="invalid-feedback">
