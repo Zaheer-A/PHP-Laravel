@@ -8,6 +8,13 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        $users = User::all();
+        return view('users.index', ['users'=>$users]);
+
+    }
+
     public function show(User $user)
     {
         return view('users.profile', ['user'=>$user]);
@@ -31,5 +38,12 @@ class UserController extends Controller
         \session()->flash('profileEditMessage', 'User has been updated');
         return back();
 
+    }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+        session()->flash('deleteUser', 'The user has been deleted!');
+        return back();
     }
 }
